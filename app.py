@@ -43,7 +43,7 @@ class Task:
         conn = sqlite3.connect(database_name)
         cursor = conn.cursor()
 
-        cursor.execute(f"SELECT * FROM {table_name} WHERE id = {id}")
+        cursor.execute(f"SELECT * FROM {table_name} WHERE id = ?", (id,))
         found_task = cursor.fetchone()
 
         if found_task is not None:
@@ -69,7 +69,7 @@ class Task:
         conn = sqlite3.connect(database_name)
         cursor = conn.cursor()
 
-        cursor.execute(f"DELETE FROM {table_name} WHERE id = {id}")
+        cursor.execute(f"DELETE FROM {table_name} WHERE id = ?", (id,))
         conn.commit()
         conn.close()
 
